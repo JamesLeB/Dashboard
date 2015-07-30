@@ -14,8 +14,20 @@ if(isset($_SESSION['user'])){
 	<script>
 		$(document).ready(function(){
 			$('#output').html('');
-			var p = {func: 'elt1'};
 			$('#etl1').click(function(){
+				var p = {func: 'etl1'};
+				$.post('action.php',p,function(data){
+					$('#output').html(data);
+				});
+			});
+			$('#etl2').click(function(){
+				var p = {func: 'etl2'};
+				$.post('action.php',p,function(data){
+					$('#output').html(data);
+				});
+			});
+			$('#etl3').click(function(){
+				var p = {func: 'etl3'};
 				$.post('action.php',p,function(data){
 					$('#output').html(data);
 				});
@@ -32,11 +44,11 @@ if(isset($_SESSION['user'])){
 		</tr>
 		<tr>
 			<td>Create final report</td>
-			<td><button>ETL-2</button></td>
+			<td><button id='etl2'>ETL-2</button></td>
 		</tr>
 		<tr>
 			<td>Clear the line</td>
-			<td><button>ETL-3</button></td>
+			<td><button id='etl3'>ETL-3</button></td>
 		</tr>
 	</table>
 	<div id='output'>output</div>
