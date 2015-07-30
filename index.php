@@ -9,6 +9,7 @@ if(isset($_SESSION['user'])){
 <html>
 <head>
 	<title>Dashboard</title>
+	<link href='style.css' rel='stylesheet'/>
 </head>
 <body>
 	<p>Welcome to the Dashboard</p>
