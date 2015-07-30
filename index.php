@@ -9,14 +9,23 @@ if(isset($_SESSION['user'])){
 <html>
 <head>
 	<title>Dashboard</title>
+	<script src='jquery-1.11.1.js'></script>
 	<link href='style.css' rel='stylesheet'/>
+	<script>
+		$(document).ready(function(){
+			$('#output').html('');
+			$('#etl1').click(function(){
+				$('#output').html('etl one');
+			});
+		});
+	</script>
 </head>
 <body>
 	<p>Welcome to the Dashboard</p>
 	<table>
 		<tr>
 			<td>Create EDI 270 request</td>
-			<td><button>ETL-1</button></td>
+			<td><button id='etl1'>ETL-1</button></td>
 		</tr>
 		<tr>
 			<td>Create final report</td>
