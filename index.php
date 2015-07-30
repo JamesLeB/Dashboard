@@ -14,8 +14,11 @@ if(isset($_SESSION['user'])){
 	<script>
 		$(document).ready(function(){
 			$('#output').html('');
+			var p = {func: 'elt1'};
 			$('#etl1').click(function(){
-				$('#output').html('etl one');
+				$.post('action.php',p,function(data){
+					$('#output').html(data);
+				});
 			});
 		});
 	</script>
