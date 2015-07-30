@@ -1,14 +1,13 @@
 <?php
 session_start();
 if(isset($_SESSION['user'])){
-	$user=$_SESSION['user'];
 
-	$a = $_POST['func'];
-
-	switch($a)
+	include('functions.php');
+	
+	switch($_POST['func'])
 	{
 		case 'etl1':
-			echo "Creating request file...";
+			echo "Creating request file...".test();
 			break;
 		case 'etl2':
 			echo "Creating final report";
