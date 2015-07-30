@@ -27,5 +27,6 @@ if(isset($_SESSION['user'])){
 			<td><button>ETL-3</button></td>
 		</tr>
 	</table>
+	<div id='output'>output</div>
 </body>
 </html>
