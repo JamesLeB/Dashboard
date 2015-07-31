@@ -12,6 +12,24 @@ if(isset($_SESSION['user'])){
 	<script src='jquery-1.11.1.js'></script>
 	<link href='style.css' rel='stylesheet'/>
 	<script>
+		function loopback()
+		{
+			$('#debug').css('background','lightgreen');
+			var p = {func: 'etl2_run'};
+			$.post('action.php',p,function(data){
+				var o = $.parseJSON(data);
+				$('#output').html(o[0]);
+				$('#debug').html(o[1]);
+				if(o[2] == 1)
+				{
+					loopback();
+				}
+				else
+				{
+					$('#debug').css('background','white');
+				}
+			});
+		}
 		$(document).ready(function(){
 			$('#etl1').click(function(){
 				var p = {func: 'etl1'};
@@ -22,11 +40,12 @@ if(isset($_SESSION['user'])){
 				});
 			});
 			$('#etl2').click(function(){
-				var p = {func: 'etl2'};
+				var p = {func: 'etl2_start'};
 				$.post('action.php',p,function(data){
 					var o = $.parseJSON(data);
 					$('#output').html(o[0]);
 					$('#debug').html(o[1]);
+					if(o[2] == 1) { loopback(); }
 				});
 			});
 			$('#etl3').click(function(){
