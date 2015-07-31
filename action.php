@@ -7,19 +7,23 @@ if(isset($_SESSION['user'])){
 	switch($_POST['func'])
 	{
 		case 'etl1':
-			echo "Creating request file...".test();
+			$msg = "groot";
+			$debug = "rocks";
 			break;
 		case 'etl2':
-			echo "Creating final report";
 			break;
 		case 'etl3':
-			echo "Clearing the line";
 			break;
 		default:
-			echo "Error";
 	}
 
-}else{
+	$e = array($msg,$debug);
+	echo json_encode($e);
+
+}
+else
+{
 	header('location:signin.php');
 }
+
 ?>

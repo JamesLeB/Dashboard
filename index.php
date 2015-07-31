@@ -13,11 +13,12 @@ if(isset($_SESSION['user'])){
 	<link href='style.css' rel='stylesheet'/>
 	<script>
 		$(document).ready(function(){
-			$('#output').html('');
 			$('#etl1').click(function(){
 				var p = {func: 'etl1'};
 				$.post('action.php',p,function(data){
-					$('#output').html(data);
+					var o = $.parseJSON(data);
+					$('#output').html(o[0]);
+					$('#debug').html(o[1]);
 				});
 			});
 			$('#etl2').click(function(){
@@ -51,7 +52,7 @@ if(isset($_SESSION['user'])){
 			<td><button id='etl3'>ETL-3</button></td>
 		</tr>
 	</table>
-	<div id='output'>output</div>
-	<div id='debug'>Debug</div>
+	<div id='output'></div>
+	<div id='debug'></div>
 </body>
 </html>
