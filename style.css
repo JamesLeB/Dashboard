@@ -33,6 +33,7 @@ td
 	margin-left: 50px;
 	margin-top:  20px;
 	width: 850px;
-	height: 350px;
+	height: 450px;
 	padding: 10px;
+	overflow: auto;
 }
