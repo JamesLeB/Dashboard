@@ -3,12 +3,15 @@ session_start();
 if(isset($_SESSION['user'])){
 
 	include('functions.php');
+
+	$msg = array();
 	
 	switch($_POST['func'])
 	{
 		case 'etl1':
-			$msg = "groot";
-			$debug = "rocks";
+			$msg[]  = "Calling etl1 function...";
+			$debug = runETL1();
+			$msg[]  = "Done...";
 			break;
 		case 'etl2':
 			break;
@@ -17,7 +20,7 @@ if(isset($_SESSION['user'])){
 		default:
 	}
 
-	$e = array($msg,$debug);
+	$e = array(implode('</br/>',$msg),$debug);
 	echo json_encode($e);
 
 }
