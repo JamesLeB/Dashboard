@@ -15,8 +15,8 @@ if(isset($_SESSION['user'])){
 			$msg[]  = "Done...";
 			break;
 		case 'etl2':
-			$msg[]  = "Create file...";
-			$debug = "lets do something";
+			$msg[]  = "Get response file...";
+			$debug = readResponse();
 			break;
 		case 'etl3':
 			$msg[]  = "Clearing the line...";
