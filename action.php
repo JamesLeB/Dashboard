@@ -5,6 +5,7 @@ if(isset($_SESSION['user'])){
 	include('functions.php');
 
 	$msg = array();
+	$debug = '';
 	
 	switch($_POST['func'])
 	{
@@ -14,8 +15,12 @@ if(isset($_SESSION['user'])){
 			$msg[]  = "Done...";
 			break;
 		case 'etl2':
+			$msg[]  = "Create file...";
+			$debug = "lets do something";
 			break;
 		case 'etl3':
+			$msg[]  = "Clearing the line...";
+			$debug = "It's cleared";
 			break;
 		default:
 	}

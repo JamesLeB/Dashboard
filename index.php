@@ -24,13 +24,17 @@ if(isset($_SESSION['user'])){
 			$('#etl2').click(function(){
 				var p = {func: 'etl2'};
 				$.post('action.php',p,function(data){
-					$('#output').html(data);
+					var o = $.parseJSON(data);
+					$('#output').html(o[0]);
+					$('#debug').html(o[1]);
 				});
 			});
 			$('#etl3').click(function(){
 				var p = {func: 'etl3'};
 				$.post('action.php',p,function(data){
-					$('#output').html(data);
+					var o = $.parseJSON(data);
+					$('#output').html(o[0]);
+					$('#debug').html(o[1]);
 				});
 			});
 		});
