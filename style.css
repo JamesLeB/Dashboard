@@ -25,3 +25,14 @@ td
 	height: 150px;
 	padding: 10px;
 }
+#debug
+{
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px;
+	margin-left: 50px;
+	margin-top:  20px;
+	width: 850px;
+	height: 350px;
+	padding: 10px;
+}

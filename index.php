@@ -52,5 +52,6 @@ if(isset($_SESSION['user'])){
 		</tr>
 	</table>
 	<div id='output'>output</div>
+	<div id='debug'>Debug</div>
 </body>
 </html>
