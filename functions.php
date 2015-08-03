@@ -304,12 +304,17 @@ function runETL2()
 }
 function mergeETL2()
 {
+	$outputRows = array();
 	$f = file_get_contents('SYSTEM/Appointments/test1.txt');
-	$s = preg_split('/\n/',$f);
+	$o = file_get_contents('SYSTEM/EDI_Response/elly.json');
+	$obj = json_decode($o,true);
+	$claims = $obj['claims'];
+	$s = preg_split('/\r\n/',$f);
 	$table = '<table>';
 	$head = array_shift($s);
 	foreach($s as $l)
 	{
+		$outputItems = array();
 		$ll = preg_split('/\t/',$l);
 		if( sizeof($ll) == 6 )
 		{
@@ -317,15 +322,48 @@ function mergeETL2()
 			foreach($ll as $i)
 			{
 				$table .= '<td>'.$i.'</td>';
+				$outputItems[] = $i;
 			}
-			$table .= '<td>'.'ins1'.'</td>';
-			$table .= '<td>'.'ins2'.'</td>';
+			$ins1 = '';
+			$ins2 = '';
+			$medNum = '';
+
+			if( preg_match('/^[a-zA-Z]{2,3}[0-9]{5}[a-zA-Z]{1}$/',$ll[3]) )
+			{
+				$ins1 = 'na';
+				$ins2 = 'na';
+				if( strlen($ll[3]) == 9 )
+				{
+					$medNum = preg_replace('/^M/','',$ll[3]);
+				}
+				else
+				{
+					$medNum = $ll[3];
+				}
+			}
+			if(isset($claims[$medNum]))
+			{
+				if( isset($claims[$medNum]['insurance'][0]) ){ $ins1 = $claims[$medNum]['insurance'][0]; }
+				if( isset($claims[$medNum]['insurance'][1]) ){ $ins2 = $claims[$medNum]['insurance'][1]; }
+			}
+
+			$table .= '<td>'.$ins1.'</td>';
+			$outputItems[] = $ins1;
+
+			$table .= '<td>'.$ins2.'</td>';
+			$outputItems[] = $ins2;
+
 			$table .= '<td>'.'stat'.'</td>';
+			$outputItems[] = 'stat';
+
 			$table .= '</tr>';
+			$outputRows[] = implode("\t",$outputItems);
 		}
 	}
 	$table .= '</table>';
-	return $table;
+	file_put_contents('SYSTEM/Final_Report/a.txt',implode("\r\n",$outputRows));
+	#return $table;
+	return "File created";
 }
 function runETL1()
 {
