@@ -2,7 +2,11 @@
 function test(){ return "Functions loaded"; }
 function setupETL2()
 {
-	if(file_exists('SYSTEM/EDI_Response/a.x12'))
+	if(file_exists('SYSTEM/EDI_Response/elly.json'))
+	{
+		return 'file on line...Please clear the line';
+	}
+	elseif(file_exists('SYSTEM/EDI_Response/a.x12'))
 	{
 		$f = file_get_contents('SYSTEM/EDI_Response/a.x12');
 

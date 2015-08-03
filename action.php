@@ -16,11 +16,17 @@ if(isset($_SESSION['user'])){
 			$msg[]  = "Done...";
 			break;
 		case 'etl2_start':
-			setupETL2();
-			$_SESSION['segCount'] = sizeof($_SESSION['segs']);
-			$msg[]  = 'Processing '.sizeof($_SESSION['segs']).' of '.$_SESSION['segCount'];
-			$debug = 'starting process';
-			$flag = 1;
+			$debug = setupETL2();
+			if(sizeof($_SESSION['segs'])>0)
+			{
+				$_SESSION['segCount'] = sizeof($_SESSION['segs']);
+				$msg[]  = 'Processing '.sizeof($_SESSION['segs']).' of '.$_SESSION['segCount'];
+				$flag = 1;
+			}
+			else
+			{
+				$msg[] = "Problem starting ETL2...";
+			}
 			break;
 		case 'etl2_run':
 			runETL2();
