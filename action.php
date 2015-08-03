@@ -42,6 +42,10 @@ if(isset($_SESSION['user'])){
 				$debug = 'Process complete';
 			}
 			break;
+		case 'etl2_merge':
+			$msg[] = 'Merging files now...';
+			$debug = mergeETL2();
+			break;
 		case 'etl3':
 			$msg[]  = "Clearing the line...";
 			$debug = "It's cleared";
