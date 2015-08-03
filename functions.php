@@ -302,6 +302,31 @@ function runETL2()
 			return implode('<br/>',$m);
 		}
 }
+function mergeETL2()
+{
+	$f = file_get_contents('SYSTEM/Appointments/test1.txt');
+	$s = preg_split('/\n/',$f);
+	$table = '<table>';
+	$head = array_shift($s);
+	foreach($s as $l)
+	{
+		$ll = preg_split('/\t/',$l);
+		if( sizeof($ll) == 6 )
+		{
+			$table .= '<tr>';
+			foreach($ll as $i)
+			{
+				$table .= '<td>'.$i.'</td>';
+			}
+			$table .= '<td>'.'ins1'.'</td>';
+			$table .= '<td>'.'ins2'.'</td>';
+			$table .= '<td>'.'stat'.'</td>';
+			$table .= '</tr>';
+		}
+	}
+	$table .= '</table>';
+	return $table;
+}
 function runETL1()
 {
 	if(file_exists('SYSTEM/EDI_Request/EDI270.x12'))
