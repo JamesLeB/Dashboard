@@ -305,6 +305,7 @@ function runETL2()
 function mergeETL2()
 {
 	$outputRows = array();
+	$outputRows[] = implode("\t",array('Last','First','Chart','Subscriber','Axium','Clinic','InsType','InsName','Ins2','Status'));
 	$f = file_get_contents('SYSTEM/Appointments/test1.txt');
 	$o = file_get_contents('SYSTEM/EDI_Response/elly.json');
 	$obj = json_decode($o,true);
@@ -347,14 +348,44 @@ function mergeETL2()
 				if( isset($claims[$medNum]['insurance'][1]) ){ $ins2 = $claims[$medNum]['insurance'][1]; }
 			}
 
+			$insType   = "na";
+			$insStatus = "Unknown";
+
+			if(strlen($ins1) < 1){$insType = '';}
+
+			if(preg_match('/^MMC/',$ins1)){$insType = 'MMC';}
+			if(preg_match('/^Med/',$ins1)){$insType = 'ART28';}
+
+			if($insType == 'MMC'){$insStatus = 'Valid';}
+			if($ll[4] == 'MEDAI3' || $ll[4] == 'MEDTHO')
+			{
+				$insStatus = $insType == 'ART28' ? 'Valid' : 'Wrong';
+				if(strlen($ins1) < 1){$insType = 'No Insurance';}
+			}
+			if($insType == 'ART28')
+			{
+				if($ll[4] == 'MEDAI3' || $ll[4] == 'MEDTHO')
+				{
+					$insStatus = 'Valid';
+				}
+				else
+				{
+					$insStatus = 'Wrong';
+				}
+			}
+			if($insType == 'na'){$insStatus = 'No Insurance';}
+
+			$table .= '<td>'.$insType.'</td>';
+			$outputItems[] = $insType;
+
 			$table .= '<td>'.$ins1.'</td>';
 			$outputItems[] = $ins1;
 
 			$table .= '<td>'.$ins2.'</td>';
 			$outputItems[] = $ins2;
 
-			$table .= '<td>'.'stat'.'</td>';
-			$outputItems[] = 'stat';
+			$table .= '<td>'.$insStatus.'</td>';
+			$outputItems[] = $insStatus;
 
 			$table .= '</tr>';
 			$outputRows[] = implode("\t",$outputItems);
