@@ -306,7 +306,7 @@ function mergeETL2()
 {
 	$outputRows = array();
 	$outputRows[] = implode("\t",array('Last','First','Chart','Subscriber','Axium','Clinic','InsType','InsName','Ins2','Status'));
-	$f = file_get_contents('SYSTEM/Appointments/test1.txt');
+	$f = file_get_contents('SYSTEM/Appointments/appt.txt');
 	$o = file_get_contents('SYSTEM/EDI_Response/elly.json');
 	$obj = json_decode($o,true);
 	$claims = $obj['claims'];
@@ -404,7 +404,8 @@ function runETL1()
 	}
 	else
 	{
-		$f = file_get_contents('SYSTEM/Appointments/test1.txt');
+		if(!file_exists('SYSTEM/Appointments/appt.txt')){ return "No apptointment File";}
+		$f = file_get_contents('SYSTEM/Appointments/appt.txt');
 		$tranNum = file_get_contents('SYSTEM/x');
 		$s = preg_split('/\n/',$f);
 	

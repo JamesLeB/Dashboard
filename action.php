@@ -40,6 +40,7 @@ if(isset($_SESSION['user'])){
 			{
 				$msg[] = 'Response file converted to Json...';
 				$debug = 'Process complete';
+				$flag = 2;
 			}
 			break;
 		case 'etl2_merge':

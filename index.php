@@ -27,6 +27,12 @@ if(isset($_SESSION['user'])){
 				else
 				{
 					$('#debug').css('background','white');
+					var p = {func: 'etl2_merge'};
+					$.post('action.php',p,function(data){
+						var o = $.parseJSON(data);
+						$('#output').html(o[0]);
+						$('#debug').html(o[1]);
+					});
 				}
 			});
 		}
@@ -39,7 +45,7 @@ if(isset($_SESSION['user'])){
 					$('#debug').html(o[1]);
 				});
 			});
-	/*
+
 			$('#etl2').click(function(){
 				var p = {func: 'etl2_start'};
 				$.post('action.php',p,function(data){
@@ -47,16 +53,6 @@ if(isset($_SESSION['user'])){
 					$('#output').html(o[0]);
 					$('#debug').html(o[1]);
 					if(o[2] == 1) { loopback(); }
-				});
-			});
-	 */
-
-			$('#etl2').click(function(){
-				var p = {func: 'etl2_merge'};
-				$.post('action.php',p,function(data){
-					var o = $.parseJSON(data);
-					$('#output').html(o[0]);
-					$('#debug').html(o[1]);
 				});
 			});
 
