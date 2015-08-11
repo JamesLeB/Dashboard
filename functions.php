@@ -1,5 +1,36 @@
 <?php
 function test(){ return "Functions loaded"; }
+function clearLine()
+{
+	$dateTime = date('ymd_Hi');
+
+	if(file_exists('SYSTEM/Appointments/appt.txt'))
+	{
+		rename('SYSTEM/Appointments/appt.txt',"SYSTEM/Appointments/Archive/$dateTime.txt");
+	}
+
+	if(file_exists('SYSTEM/EDI_Request/EDI270.x12'))
+	{
+		rename('SYSTEM/EDI_Request/EDI270.x12',"SYSTEM/EDI_Request/Archive/$dateTime.x12");
+	}
+
+	if(file_exists('SYSTEM/EDI_Response/a.x12'))
+	{
+		rename('SYSTEM/EDI_Response/a.x12',"SYSTEM/EDI_Response/Archive/$dateTime.x12");
+	}
+
+	if(file_exists('SYSTEM/EDI_Response/elly.json'))
+	{
+		rename('SYSTEM/EDI_Response/elly.json',"SYSTEM/EDI_Response/Archive/$dateTime.json");
+	}
+
+	if(file_exists('SYSTEM/Final_Report/a.txt'))
+	{
+		rename('SYSTEM/Final_Report/a.txt',"SYSTEM/Final_Report/Archive/$dateTime.txt");
+	}
+
+	return "I am groot";
+}
 function setupETL2()
 {
 	if(file_exists('SYSTEM/EDI_Response/elly.json'))

@@ -49,7 +49,7 @@ if(isset($_SESSION['user'])){
 			break;
 		case 'etl3':
 			$msg[]  = "Clearing the line...";
-			$debug = "It's cleared";
+			$debug = clearLine();
 			break;
 		default:
 			$msg[]  = "Hmm...";
