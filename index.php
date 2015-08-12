@@ -82,6 +82,10 @@ if(isset($_SESSION['user'])){
 			<td>Clear the line</td>
 			<td><button id='etl3'>ETL-3</button></td>
 		</tr>
+		<tr>
+			<td>Process EOB</td>
+			<td><a href='services/openEOB.php'><button id='etl4'>ETL-4</button></a></td>
+		</tr>
 	</table>
 	<div id='output'></div>
 	<div id='debug'></div>
