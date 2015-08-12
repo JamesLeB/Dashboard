@@ -437,7 +437,15 @@ function runETL1()
 	{
 		if(!file_exists('SYSTEM/Appointments/appt.txt')){ return "No apptointment File";}
 		$f = file_get_contents('SYSTEM/Appointments/appt.txt');
-		$tranNum = file_get_contents('SYSTEM/x');
+		$tranNum = 0;
+		if(file_exists('SYSTEM/x'))
+		{
+			$tranNum = file_get_contents('SYSTEM/x');
+		}
+		else
+		{
+			$tranNum = 900100100;
+		}
 		$s = preg_split('/\n/',$f);
 	
 		$date6 = date('ymd');
